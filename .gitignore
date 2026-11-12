@@ -1,0 +1,5 @@
+node_modules/
+*.log
+*.json.key
+conta-de-servico*.json
+.env
