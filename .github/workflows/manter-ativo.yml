@@ -1,0 +1,19 @@
+name: Manter ativo
+
+# O GitHub desliga agendamentos de repositórios públicos sem atividade por 60 dias.
+# Uma vez por semana este fluxo reativa o agendamento da coleta.
+on:
+  schedule:
+    - cron: '17 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+
+jobs:
+  reativar:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/coletar.yml/enable"
+        env:
+          GH_TOKEN: ${{ github.token }}
